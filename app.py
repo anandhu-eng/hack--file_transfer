@@ -12,7 +12,8 @@ def rec():
 
 @app.route("/server")
 def ser():
-    return render_template('server.html')
+    devices=["asus","dell","apple","hp"]
+    return render_template('server.html', devices=devices, name="anandhu")
 
 
 
