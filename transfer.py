@@ -6,10 +6,13 @@ import socket
 from typing import Any, Optional
 
 HOST = 'localhost'  #server.
-PORT = 61340  #lspci--ubuntu            #client sends file to the server.
+PORT = 61345  #lspci--ubuntu            #client sends file to the server.
 
 log.basicConfig(level=log.INFO)
 
+"""
+Helper class with static methods for sending and recieving data using sockets.
+"""
 class Transfer:
     @staticmethod
     def recv(conn: socket.socket):
@@ -101,6 +104,7 @@ class Server:
         Transfer.send_file(self.client.conn, filename)
 
     def shutdown(self):
+        self.disconnet()
         self.socket.close()
         log.info("Shutdown server")
 
@@ -149,4 +153,69 @@ if __name__ == "__main__":
         file = input("Filename to upload: ")
 
         client.send_file(file)
+
+
+SERVER: Optional[Server] = None
+CLIENT: Optional[Client] = None
+
+# ----- Server Functions ------ #
+
+def server_start():
+    global SERVER
+    SERVER = Server()
+
+def server_stop():
+    global SERVER
+    if SERVER is None:
+        return
+
+    SERVER.shutdown()
+
+def server_wait_for_client_to_connect():
+    global SERVER
+    if SERVER is None:
+        return
+
+    SERVER.connect()
+
+def server_send_file(filepath: str):
+    global SERVER
+    if SERVER is None:
+        return
+
+    SERVER.send_file(filepath)
+
+def server_recieve_file(savepath: str):
+    global SERVER
+    if SERVER is None:
+        return
+
+    SERVER.recv_file(savepath)
+
+# ----- Client Functions ------ #
+
+def client_start():
+    global CLIENT
+    CLIENT = Client()
+
+def client_stop():
+    global CLIENT
+    if CLIENT is None:
+        return
+
+    CLIENT.shutdown()
+
+def client_send_file(filepath: str):
+    global CLIENT
+    if CLIENT is None:
+        return
+
+    CLIENT.send_file(filepath)
+
+def client_recieve_file(savepath: str):
+    global CLIENT
+    if CLIENT is None:
+        return
+
+    CLIENT.recv_file(savepath)
 
