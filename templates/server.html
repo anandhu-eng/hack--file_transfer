@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <title>{{name}}</title>
         <!--<link rel="stylesheet" type="text/css" href="style.css">-->
     </head>
     <body>
@@ -10,12 +10,12 @@
             <div class="screen join-screen active">
                <div class="form">
                   <h2>Share your files securely</h2>
+                  
                   <label for="Devices">Choose an available device:</label>
                      <select id="Devices">
-                     <option label="Lap1"></option>
-                     <option label="Lap2"></option>
-                     <option label="Lap3"></option>
-                     <option label="Lap4"></option>
+                     {% for device in devices %}
+                     <option label={{device}}></option>
+                     {% endfor %}
                      </select>
                   <!--
                   <div class="form-input">

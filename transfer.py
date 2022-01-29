@@ -5,8 +5,8 @@ import dataclasses
 import socket
 from typing import Any, Optional
 
-HOST = 'localhost'
-PORT = 61345
+HOST = 'localhost'  #server.
+PORT = 61340  #lspci--ubuntu            #client sends file to the server.
 
 log.basicConfig(level=log.INFO)
 
