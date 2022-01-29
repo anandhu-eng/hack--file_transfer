@@ -8,6 +8,9 @@ body{
     background:#eee;
     font-family:sans-serif;
 }
+h1{
+    font-family: "Sofia";
+}
 
 .banner-area{
     width:100%;
@@ -38,16 +41,18 @@ body{
 }
 
 .content .btn{
+
     border:none;
     outline:none;
-    padding:15px;
-    margin-top:100px;
+    padding:20px;
+    margin-top:90px;
     border-radius: 4px;
-    color:#eee;
-    font-size: 18px;
+    color:white;
+    font-size: 20px;
     cursor: pointer;    
     background:#222;             
 }
+
 
 /* main area */
 
