@@ -27,15 +27,18 @@
               </div>
             </div>
             <br />
+            <form action="/recSide" method="post" enctype="multipart/form-data">   <!--Edited-->
             <div class="form-input">
               <label for="fNameExtension">Enter file name :</label>
               <input
                 type="text"
+                name="Filesave"
                 id="fNameExtension"
                 placeholder="file_name.extension"
               />
-              <button class="btn" type="button" onclick="">Save</button>
+              <button class="btn" type="submit">Start the client</button>
             </div>
+            </form>
           </div>
         </div>
       </div>

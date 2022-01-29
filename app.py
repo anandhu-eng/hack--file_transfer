@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 
 app = Flask(__name__)
 
@@ -14,7 +14,15 @@ def rec():
 def ser():
     devices=["asus","dell","apple","hp"]
     return render_template('server.html', devices=devices, name="anandhu")
-
+@app.route("/serverShare", methods=['POST'])
+def sShare():
+    file=request.files["File Input"]
+    print (file.filename)
+@app.route("/recSide", methods=['POST'])
+def recSide():
+    file=request.form["Filesave"]
+    print (file)
+    
 
 
 #to go to the virtualenv: source venv/Scripts/activate
