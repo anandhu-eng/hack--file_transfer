@@ -87,8 +87,13 @@ footer {
     left: 30px;
 }
 
-.output {
-    background: center/cover no-repeat url('home1.jpeg');
-    position: relative;
+.blah {
+    background-image: url(static/home1.jpeg);
+    background-repeat: no-repeat;
+    background-size: 300px 100px;
 }
+.link{
+    text-align: center;
+}
+    
 
