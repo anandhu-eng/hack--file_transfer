@@ -20,3 +20,4 @@ def retrieve():
 		return l[choose]
 
 k=retrieve()
+print(k)

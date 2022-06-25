@@ -1,5 +1,9 @@
 from flask import Flask, render_template,request
-import transfer
+from available_dev import wifi_names
+from werkzeug.utils import secure_filename
+import server_code
+import os
+import client_code
 
 app = Flask(__name__)
 
@@ -13,26 +17,34 @@ def rec():
 
 @app.route("/server")
 def ser():
-    devices=["asus","dell","apple","hp"]
-    return render_template('server.html', devices=devices, name="anandhu")
+    devices=wifi_names()
+    return render_template('server.html', devices=devices[1:], name="anandhu")
 
 
 @app.route("/serverShare", methods=['POST'])
 def sShare():
     file=request.files["File Input"]
-    print (file.filename)
-    transfer.server_start()
-    transfer.server_wait_for_client_to_connect()
-    transfer.server_send_file(file)
+    filename = secure_filename(file.filename)
+    print (filename)
+    file.save(filename)
+    s = server_code.create_connection()
+    filesize = os.path.getsize(filename)
+    server_code.send_file(s, filename, filesize)
+    server_code.close_connection(s)
+    os.remove(filename)
+    return "file sent!"
 
     
 @app.route("/recSide", methods=['POST'])
 def recSide():
-    file=request.form["Filesave"]
-    print (file)
-    transfer.client_start()
-    transfer.client_recieve_file(file)
+    s = client_code.create_connection()
+    client_socket = client_code.conn_listening(s)
+    client_code.recieve(client_socket, s)
+    client_code.close_connection(s, client_socket)
+    return "File recieved"
 
 
 #to go to the virtualenv: source venv/Scripts/activate
 #to deactivate: deactivate
+if __name__ == "__main__":
+    app.run(debug=True)
