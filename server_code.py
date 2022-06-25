@@ -11,7 +11,7 @@ import os
 seperator = "<SEPERATOR>"
 buffersize = 4096
 # the ip address or hostname of the server, the receiver
-host = "192.168.240.232"
+host = "hostip"
 # the port, let's use 5001
 port = 5002
 # the name of file we want to send, make sure it exists
