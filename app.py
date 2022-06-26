@@ -28,11 +28,14 @@ def sShare():
     print (filename)
     file.save(filename)
     s = server_code.create_connection()
-    filesize = os.path.getsize(filename)
-    server_code.send_file(s, filename, filesize)
-    server_code.close_connection(s)
-    os.remove(filename)
-    return "file sent!"
+    if(s==None and os.path.isfile(filename)):
+        return "File recieved through common endpoint.... may be through mobile device"
+    else:
+        filesize = os.path.getsize(filename)
+        server_code.send_file(s, filename, filesize)
+        server_code.close_connection(s)
+        os.remove(filename)
+        return "file sent!"
 
     
 @app.route("/recSide", methods=['POST'])
@@ -47,4 +50,4 @@ def recSide():
 #to go to the virtualenv: source venv/Scripts/activate
 #to deactivate: deactivate
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")

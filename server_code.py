@@ -10,10 +10,10 @@ import os
 #settings
 seperator = "<SEPERATOR>"
 buffersize = 4096
-# the ip address or hostname of the server, the receiver
-host = "hostip"
+# the ip address or hostname of the receiver
+host = "hostid"
 # the port, let's use 5001
-port = 5002
+port = 5004
 # the name of file we want to send, make sure it exists
 #filename = "/home/user/Desktop/basics.sh"
 # get the file size
